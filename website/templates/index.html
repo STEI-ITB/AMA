@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>PEOPLE COUNTING</title>
+    <link rel="stylesheet" type="text/css" href="static/css/index.css?" + new Date().getTime() />
+   
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var i = 1
+            
+            setInterval(ajax, 1000);
+            setInterval(ajax2, 100);
+            var datapointgrafikYOLO = []
+            var datapointgrafikAWR = []
+            
+
+            function ajax2() {
+                
+                $.ajax({
+                    success: function () {
+                        $("#plotYOLO").attr("src", "/static/plot_yolo.png?" + new Date().getTime());
+                    }
+                })
+                
+                
+            }
+
+            function ajax() {
+                $.ajax({
+                    type: "GET",
+                    url: "/static/data_yolo.csv?" + new Date().getTime(),
+                    dataType: "text",
+                    success: function (data_yolo) { processData(data_yolo, "yolo"), updateChart(data_yolo, "yolo") }
+                });
+                $.ajax({
+                    type: "GET",
+                    url: "/static/data_awr.csv?" + new Date().getTime(),
+                    dataType: "text",
+                    success: function (data_awr) { processData(data_awr, "awr"), updateChart(data_awr, "awr") }
+                });
+                $.ajax({
+                    success: function () {
+                        $("#plotAWR").attr("src", "/static/plot_awr.png?" + new Date().getTime());
+                    }
+                })
+            }
+
+            //function processDataFPS(isicsv, sistem) {
+            //    var isicsvsemuabaris = isicsv.split(/\r\n|\n/);
+            //    var isicsvperbaris = isicsvsemuabaris[i].split(',');
+            //    FPS = 1000 / isicsvperbaris[2];
+                
+            //    }
+
+            function processData(isicsv, sistem) {
+                var isicsvsemuabaris = isicsv.split(/\r\n|\n/);
+                var isicsvperbaris = isicsvsemuabaris[i].split(',');
+
+                //assign setiap baris ke variable
+                var waktu = isicsvperbaris[0]
+                var angka= isicsvperbaris[1]
+
+                if (sistem === "yolo") {
+                    //mengganti element teks html
+                    document.getElementById("waktuYOLO").innerHTML = waktu
+                    document.getElementById("angkaYOLO").innerHTML = angka
+                }
+                else {
+                    document.getElementById("waktuAWR").innerHTML = waktu
+                    document.getElementById("angkaAWR").innerHTML = angka
+                }
+                
+
+            }
+
+            function updateChart(isicsv, sistem) {
+                var isicsvsemuabaris = isicsv.split(/\r\n|\n/);
+                var isicsvperbaris = isicsvsemuabaris[i].split(',');
+                var waktu = isicsvperbaris[0].split(':')
+                var jam = Number(waktu[0])
+                var menit = Number(waktu[1])
+                var detik = Number(waktu[2])
+                var totaldetik = ((jam * 3600) + (menit * 60) + detik)/1000
+
+                //assign datapoint grafik
+                if (sistem === "yolo") {
+                    datapointgrafikYOLO.push({
+                        x: totaldetik,
+                        y: Number(isicsvperbaris[1])
+                    })
+                }
+                else {
+                    datapointgrafikAWR.push({
+                        x: totaldetik,
+                        y: Number(isicsvperbaris[1])
+                    })
+                }
+
+                if (datapointgrafikYOLO.length > 20) {
+                    datapointgrafikYOLO.shift()
+                }
+                if (datapointgrafikAWR.length > 20) {
+                    datapointgrafikAWR.shift()
+                }
+
+                
+
+                chart.render();
+
+            }
+
+            
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+
+                axisX: {
+                    title: "Timestamp",
+                    includeZero: false,
+                    suffix: " ribu detik"
+                },
+
+                axisY: {
+                    title: "Jumlah Manusia",
+                    includeZero: false,
+                    suffix: " orang"
+                },
+                legend: {
+                    cursor: "pointer",
+                    fontSize: 16,
+                    itemclick: toggleDataSeries
+                },
+                data: [{
+                    name: "Data YOLO",
+                    type: "spline",
+                    showInLegend: true,
+                    yValueFormatString: "# orang",
+                    dataPoints: datapointgrafikYOLO
+                },
+                {
+                    name: "Data AWR",
+                    type: "spline",
+                    showInLegend: true,
+                    yValueFormatString: "# orang",
+                    dataPoints: datapointgrafikAWR
+                }
+                ]
+
+
+            })
+
+            function toggleDataSeries(e) {
+                if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                    e.dataSeries.visible = false;
+                }
+                else {
+                    e.dataSeries.visible = true;
+                }
+                chart.render();
+            }
+
+
+
+        });
+
+    </script>
+
+</head>
+<body>
+    <header>
+        <h1>PEOPLE COUNTING</h1>
+    </header>
+    <div class="main2">
+        <div class="main">
+            <div class="AWR">
+                <h2>AWR1642</h2>
+                <p id="angkaAWR">11</p>
+                <p id="waktuAWR">5/16/2019 5:30</p>
+            </div>
+
+            <div class="YOLO">
+                <h2>YOLO</h2>
+                <p id="angkaYOLO">12</p>
+                <p id="waktuYOLO">5/16/2019 5:30</p>
+            </div>
+
+
+        </div>
+        <div class="PLOTYOLO">
+            <h2> PLOT YOLO</h2>
+            <img id="plotYOLO" style="height: 320px; width: 100%;"></img>
+        </div>
+
+    </div>
+
+    <div class="main2">
+        <div class="GRAFIK">
+            <h2> GRAFIK PEOPLE COUNTING </h2>
+            <div id="chartContainer" style="height:350px; width: 100%;"></div>
+
+        </div>
+
+        <div class="PLOTAWR">
+            <h2> PLOT AWR </h2>
+            <img id="plotAWR" style="height: 350px; width: 100%;" ></img>
+        </div>
+
+    </div>
+    
+
+
+    <footer>
+        <p>AMA PROJECT ©</p>
+    </footer>
+
+</body>
+</html>

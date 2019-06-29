@@ -1,0 +1,76 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    background-color: deepskyblue;
+    font-family: 'ADAM.CG PRO';
+    height: 40px;
+    text-align: center;
+}
+
+body {
+    zoom: 100%;
+}
+
+.main {
+    align-content: center;
+    display: grid;
+    grid-template-columns: 320px 320px;
+    grid-gap: 20px;
+    justify-content: center;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.PLOTYOLO{
+    width : 650px;
+    /*height : 500px;*/
+}
+
+.main2 {
+    align-content: center;
+    display: grid;
+    grid-template-columns: 650px 650px;
+    grid-gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+.AWR h2, .YOLO h2, .GRAFIK h2, .PLOTAWR h2, .PLOTYOLO h2 {
+    background-color: cornflowerblue;
+    font-family: Roboto;
+}
+
+.AWR, .YOLO {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+    height: 175px;    
+}
+
+
+#angkaAWR, #angkaYOLO{
+    font-family: Arial;
+    font-size: 90px;
+}
+
+#waktuAWR, #waktuYOLO {
+    font-family: Arial;
+    font-size: 15px;
+}
+
+footer {
+    bottom: 0;
+    background-color: slategrey;
+    color:white;
+    font-family: 'ADAM.CG PRO';
+    font-size: 15px;
+    height: 25px;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
