@@ -5,6 +5,9 @@ Object detection system is one of the current needs. The increasing use of objec
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/0CkqzWnJWqA/0.jpg)](http://www.youtube.com/watch?v=0CkqzWnJWqA)
 
 
+
+
+
 For object detection system we made, we split the system into 3 subsystem:
 <ul>
   <li>AWR System</li>
