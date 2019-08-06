@@ -1,7 +1,7 @@
 # HUMAN DETECTION USING AWR1642 & YOLOv3
 Object detection system is one of the current needs. The increasing use of object detection systems in various fields has resulted in the fast development of object detection systems. The development carried out according to the needs or needs of each case example. Current conditions require the development of a reliable object detection system. One of the most reliable object detection systems is an object detection system that is independent with light intensity. Therefore in this Final Project an object detection system is made using radar and cameras to be able to detect without the dependence of light intensity. Object detection systems are made to be able to detect human classes, so that the output of this system is the number of humans detected. Object detection system using a camera used artificial intelligence to improve the performance using the YOLO model, while for the object detection system using radar, the AWR1642 was used. The detection results of this object detection system are finally displayed on the web interface
 
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/www.youtube.com/watch?v=0CkqzWnJWqA/0.jpg)](http://www.youtube.com/watch?v=0CkqzWnJWqA)
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/0CkqzWnJWqA/0.jpg)](http://www.youtube.com/watch?v=0CkqzWnJWqA)
 
 For object detection system we made, we split the system into 3 subsystem:
 <ul>
