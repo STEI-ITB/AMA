@@ -3,9 +3,9 @@ Object detection system is one of the current needs. The increasing use of objec
 
 <h1> Video Implementation </h1> 
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/0CkqzWnJWqA/0.jpg)](http://www.youtube.com/watch?v=0CkqzWnJWqA)
+
+
 <p>for the day and night implementation jump to 3:06. </p>
-
-
 For object detection system we made, we split the system into 3 subsystem:
 <ul>
   <li>AWR System</li>
